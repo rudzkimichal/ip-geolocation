@@ -1,11 +1,20 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "module": "commonjs",
+    "baseUrl": ".",
     "outDir": "./dist",
+    "noImplicitAny": true,
     "esModuleInterop": true,
+    "moduleResolution": "node",
     "strict": true,
+    "sourceMap": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
-  }
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
+    "paths": {
+        "*": ["node_modules/*"]
+    }
+  },
+  "include": ["server/**/*"]
 }
