@@ -1,4 +1,5 @@
 import { Router, Request, Response } from 'express';
+import { ObjectId } from 'mongodb';
 import { collection } from '../db/client';
 
 export const dbRouter = Router();
@@ -16,8 +17,22 @@ dbRouter.post('/items', async (req: Request, resp: Response) => {
   try {
     const item = req.body;
     const payload = await collection.insertOne(item);
-    payload ? resp.status(201).send('Item successfully added to database') : resp.status(500).send('Item not added to database')
+    payload ? resp.status(201).send('Item successfully added to database') : resp.status(500).send('Item not added to database');
   } catch(error) {
     if(error instanceof Error) resp.status(404).send(error.message);
+  }
+});
+
+dbRouter.put('/items/:id', async (req: Request, resp: Response) => {
+  try {
+    const id = req?.params?.id;
+    const updatedItem = req.body;
+    const payload = await collection.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: updatedItem}
+    );
+    payload ? resp.status(200).send(`Successfully updated item with id ${id}`) : resp.status(400).send(`Couldn't update item with id ${id}`);
+  } catch(error) {
+    if(error instanceof Error) resp.status(400).send(error.message);
   }
 });
