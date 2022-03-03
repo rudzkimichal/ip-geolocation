@@ -36,3 +36,13 @@ dbRouter.put('/items/:id', async (req: Request, resp: Response) => {
     if(error instanceof Error) resp.status(400).send(error.message);
   }
 });
+
+dbRouter.delete('/items/:id', async (req: Request, resp: Response) => {
+  try {
+    const id = req?.params?.id;
+    const itemRemoval = await collection.deleteOne({ _id: new ObjectId(id) });
+    itemRemoval ? resp.status(202).send(`Successfully deleted item with id ${id}`) : resp.status(400).send(`Couldn't update item with id ${id}`);
+  } catch(error) {
+    if(error instanceof Error) resp.status(404).send(error.message);
+  }
+});
