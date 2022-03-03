@@ -3,7 +3,7 @@ import express, { Request, Response } from 'express';
 
 export const apiRouter = express.Router();
 
-apiRouter.get(`/api/:item`, async (req: Request, resp: Response) => {
+apiRouter.get(`/:item`, async (req: Request, resp: Response) => {
   try {
     const item = req?.params?.item;
     const response = await axios.get(

@@ -9,7 +9,7 @@ const app = express();
 const port = 8080;
 
 connectDatabase();
-app.use(apiRouter);
-app.use(dbRouter);
+app.use('/api', apiRouter);
+app.use('/db', dbRouter);
 
 app.listen(port, () => console.log(`App listening on port ${port}`));
