@@ -6,7 +6,14 @@ export const apiRouter = express.Router();
 apiRouter.get(`/api/:item`, async (req: Request, resp: Response) => {
   try {
     const item = req?.params?.item;
-    const response = await axios.get(`http://api.ipstack.com/${item}?access_key=${process.env.API_KEY}`);
+    const response = await axios.get(
+      `http://api.ipstack.com/${item}`,
+      {
+        params: {
+          access_key: process.env.API_KEY
+        }
+      }
+    );
     resp.status(200).send(response.data);
 
   } catch(e) {
