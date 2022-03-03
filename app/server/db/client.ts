@@ -1,8 +1,18 @@
 import dotenv from 'dotenv';
-import { MongoClient } from 'mongodb';
+import { MongoClient, Collection } from 'mongodb';
+import Item from './model';
+import validateWithSchema from './schema';
 
-dotenv.config();
+export let collection: Collection<Item>;
 
-export const client = new MongoClient(
-  `mongodb+srv://admin:${process.env.DB_PASSWORD}@geolocation.f3uwb.mongodb.net/geolocation?retryWrites=true&w=majority`
-);
+export const connectDatabase = async () => {
+  dotenv.config();
+
+  const client = new MongoClient(`${process.env.DB_URI}`);
+  await client.connect();
+  const db = client.db('geolocation');
+  await validateWithSchema(db);
+  const itemsCollection = db.collection<Item>('data');
+  collection = itemsCollection;
+  console.log(`Database '${db.databaseName}' connected.`);
+};
