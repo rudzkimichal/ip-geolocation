@@ -10,39 +10,33 @@ const validateWithSchema = async (db: Db) => {
                 _id: {},
                 name: {
                     bsonType: 'string',
-                    description: '"name" is required',
+                    description: '"name" is required'
                 },
                 city: {
                     bsonType: 'string',
-                    description: '"city" is required',
+                    description: '"city" is required'
                 },
                 region: {
                     bsonType: 'string'
                 },
                 country: {
                     bsonType: 'string',
-                    description: '"country" is required',
+                    description: '"country" is required'
                 },
                 flag: {
                     bsonType: 'string'
                 },
                 longitude: {
                     bsonType: 'decimal',
-                    description: '"longitude" is required',
+                    description: '"longitude" is required'
                 },
                 latitude: {
                     bsonType: 'decimal',
-                    description: '"latitude" is required',
+                    description: '"latitude" is required'
                 }
             }
         }
     };
-
-    // export default interface Item {
-    //   flag: URL;
-    //   latitude: number;
-    //   longitude: number;
-    // }
 
    await db.command({
         collMod: 'data',
