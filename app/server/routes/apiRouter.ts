@@ -15,8 +15,7 @@ apiRouter.get(`/api/:item`, async (req: Request, resp: Response) => {
       }
     );
     resp.status(200).send(response.data);
-
-  } catch(e) {
-    resp.status(404).send('Unable to find item matching query');
+  } catch(error) {
+    if(error instanceof Error) resp.status(404).send('Unable to find item matching query');
   }
 });
