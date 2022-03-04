@@ -2,10 +2,10 @@
   "name": "ip-geolocation",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "./src/index.ts",
   "scripts": {
-    "start:dev": "nodemon",
-    "build": "rm -rf ./dist && tsc"
+    "start:dev": "nodemon -L",
+    "build": "tsc"
   },
   "author": "Michal Rudzki",
   "license": "ISC",
