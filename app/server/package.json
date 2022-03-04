@@ -5,10 +5,25 @@
   "main": "./src/index.ts",
   "scripts": {
     "start:dev": "nodemon -L",
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "eslint ."
   },
   "author": "Michal Rudzki",
   "license": "ISC",
+  "eslintConfig": {
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "env": {
+      "node": true
+    }
+  },
   "devDependencies": {
     "nodemon": "^2.0.15",
     "ts-node": "^10.5.0"

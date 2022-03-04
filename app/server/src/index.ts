@@ -1,6 +1,5 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { BodyParser } from 'body-parser';
 import { connectDatabase } from './db/client';
 import { apiRouter } from './routes/apiRouter';
 import { dbRouter } from './routes/dbRouter';
