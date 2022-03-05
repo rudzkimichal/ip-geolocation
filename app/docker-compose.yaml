@@ -4,3 +4,4 @@ services:
     build: ./server
     ports: ['8080:8080']
     volumes: ['./server/src:/app/server/src']
+    command: npm run start:dev
