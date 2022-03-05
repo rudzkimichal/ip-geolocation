@@ -17,6 +17,6 @@ export const connectDatabase = async () => {
     collection = itemsCollection;
     console.log(`Database '${db.databaseName}' connected.`);
   } catch(error) {
-    if(error instanceof Error) console.log(error.message);
+    if(error instanceof Error) console.error(`Database connection failed - ${error.message}`);
   }
 };
