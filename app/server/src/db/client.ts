@@ -6,13 +6,17 @@ import validateWithSchema from './schema';
 export let collection: Collection<Item>;
 
 export const connectDatabase = async () => {
-  dotenv.config();
+  try {
+    dotenv.config();
 
-  const client = new MongoClient(`${process.env.DB_URI}`);
-  await client.connect();
-  const db = client.db('geolocation');
-  await validateWithSchema(db);
-  const itemsCollection = db.collection<Item>('data');
-  collection = itemsCollection;
-  console.log(`Database '${db.databaseName}' connected.`);
+    const client = new MongoClient(`${process.env.DB_URI}`);
+    await client.connect();
+    const db = client.db('geolocation');
+    await validateWithSchema(db);
+    const itemsCollection = db.collection<Item>('data');
+    collection = itemsCollection;
+    console.log(`Database '${db.databaseName}' connected.`);
+  } catch(error) {
+    if(error instanceof Error) console.log(error.message);
+  }
 };
