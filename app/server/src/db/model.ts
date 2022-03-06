@@ -4,9 +4,9 @@ export default interface Item {
   id?: ObjectId;
   name: string;
   city: string;
-  region: string;
+  region?: string;
   country: string;
-  flag: URL;
+  flag?: string;
   latitude: number;
   longitude: number;
 }
