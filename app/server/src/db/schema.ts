@@ -8,9 +8,9 @@ const validateWithSchema = async (db: Db) => {
             "additionalProperties": false,
             "properties": {
                 "_id": {},
-                "name": {
+                "ipOrUrl": {
                     "bsonType": "string",
-                    "description": "name is required"
+                    "description": "IP or url is required"
                 },
                 "city": {
                     "bsonType": "string",

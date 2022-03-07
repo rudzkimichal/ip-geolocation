@@ -16,6 +16,7 @@ dbRouter.get(`/items`, async (req: Request, resp: Response) => {
 dbRouter.post('/items', async (req: Request, resp: Response) => {
   try {
     const item = req.body;
+    if(await collection.find({ipOrUrl: req.body.ipOrUrl})) return resp.status(303).send('Data for given IP or url already in the database.');
     const payload = await collection.insertOne(item);
     payload ? resp.status(201).json(payload) : resp.status(500).send('Item not added to database');
   } catch(error) {

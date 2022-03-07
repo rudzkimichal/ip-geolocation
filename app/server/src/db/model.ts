@@ -2,7 +2,7 @@ import { ObjectId } from 'mongodb';
 
 export default interface Item {
   id?: ObjectId;
-  name: string;
+  ipOrUrl: string;
   city: string;
   region?: string;
   country: string;
