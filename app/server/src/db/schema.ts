@@ -27,11 +27,11 @@ const validateWithSchema = async (db: Db) => {
                     "bsonType": "string"
                 },
                 "longitude": {
-                    "bsonType": "decimal",
+                    "bsonType": "double",
                     "description": "longitude is required"
                 },
                 "latitude": {
-                    "bsonType": "decimal",
+                    "bsonType": "double",
                     "description": "latitude is required"
                 }
             }
