@@ -1,14 +1,14 @@
 import { Router, Request, Response } from 'express';
 import { ObjectId } from 'mongodb';
 import { getDb } from '../db/client';
+import { Item } from '../db/models';
 
 export const dbRouter = Router();
 
 dbRouter.get(`/items`, async (req: Request, resp: Response) => {
   try {
     const db = await getDb();
-    const response = await db.collection('data').find({}).toArray();
-    const items = await response;
+    const items = await db.collection<Item>('data').find({}).toArray();
     resp.status(200).json(items);
   } catch(error) {
     if(error instanceof Error) resp.status(500).send(error.message);
@@ -18,10 +18,10 @@ dbRouter.get(`/items`, async (req: Request, resp: Response) => {
 dbRouter.post('/items', async (req: Request, resp: Response) => {
   try {
     const db = await getDb();
-    const item = req.body;
-    if(await db.collection('data').find({ipOrUrl: req.body.ipOrUrl})) return resp.status(303).send('Data for given IP or url already in the database.');
-    const payload = await db.collection('data').insertOne(item);
-    payload ? resp.status(201).json(payload) : resp.status(500).send('Item not added to database');
+    const item: Item = req.body;
+    if(await db.collection<Item>('data').findOne({ipOrUrl: req.body.ipOrUrl})) return resp.status(303).send('Data for given IP or url already in the database.');
+    const payload = await db.collection<Item>('data').insertOne(item);
+    payload ? resp.status(201).json(payload) : resp.status(500).send('Item not added to database.');
   } catch(error) {
     if(error instanceof Error) resp.status(404).send(error.message);
   }
